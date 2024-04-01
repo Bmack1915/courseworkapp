@@ -2,6 +2,51 @@
   text-align: center;
 }
 
+/* src/App.css */
+.btn-primary {
+  width: 100%; /* Full width */
+  background-color: #007bff; /* Blue background */
+  color: white; /* White text color */
+  padding: 20px 0; /* Padding above and below the text */
+  text-align: center; /* Center the text */
+  font-family: 'Arial', sans-serif; /* Nicer font */
+  font-size: 24px; /* Larger font size */
+  box-sizing: border-box; /* Ensure padding doesn't affect the total width */
+}
+.header-title {
+  background-color: #007bff;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  font-size: 24px;
+  margin: 0;
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  background-color: #f8f9fa;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #007bff;
+  font-family: 'Arial', sans-serif;
+  margin: 0 15px;
+  font-size: 18px;
+}
+
+.nav-link:hover {
+  color: #0056b3;
+}
+
+body {
+  margin: 0; /* Remove default body margin */
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
