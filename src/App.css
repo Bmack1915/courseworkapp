@@ -11,8 +11,33 @@
   text-align: center; /* Center the text */
   font-family: 'Arial', sans-serif; /* Nicer font */
   font-size: 24px; /* Larger font size */
-  box-sizing: border-box; /* Ensure padding doesn't affect the total width */
+  box-sizing: border-box; 
 }
+
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Adjust this to 'flex-start', 'center', or 'space-between' as needed */
+}
+
+.team-panel {
+  flex: 0 1 calc(33.333% - 20px); /* Subtract margin/padding from 33.333% */
+  margin: 10px; /* Adjust the margin as needed */
+  /* Add your existing styles here */
+}
+
+
+.team-badge {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.team-name {
+  font-weight: bold;
+  text-align: center;
+}
+
 .header-title {
   background-color: #007bff;
   color: white;
