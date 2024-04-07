@@ -1,0 +1,6 @@
+/Users/macke/Desktop/WebCoursework/obj/Debug/netcoreapp3.1/WebCoursework.csproj.AssemblyReference.cache
+/Users/macke/Desktop/WebCoursework/obj/Debug/netcoreapp3.1/WebCoursework.GeneratedMSBuildEditorConfig.editorconfig
+/Users/macke/Desktop/WebCoursework/obj/Debug/netcoreapp3.1/WebCoursework.AssemblyInfoInputs.cache
+/Users/macke/Desktop/WebCoursework/obj/Debug/netcoreapp3.1/WebCoursework.AssemblyInfo.cs
+/Users/macke/Desktop/WebCoursework/obj/Debug/netcoreapp3.1/WebCoursework.csproj.CoreCompileInputs.cache
+/Users/macke/Desktop/WebCoursework/obj/Debug/netcoreapp3.1/WebCoursework.sourcelink.json
