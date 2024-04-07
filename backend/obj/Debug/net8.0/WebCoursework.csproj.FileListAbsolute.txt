@@ -312,7 +312,6 @@
 /Users/macke/Desktop/courseworkapp/backend/bin/Debug/net8.0/appsettings.json
 /Users/macke/Desktop/courseworkapp/backend/bin/Debug/net8.0/WebCoursework.staticwebassets.runtime.json
 /Users/macke/Desktop/courseworkapp/backend/bin/Debug/net8.0/WebCoursework
-/Users/macke/Desktop/courseworkapp/backend/bin/Debug/net8.0/SportsLeague.db
 /Users/macke/Desktop/courseworkapp/backend/bin/Debug/net8.0/Models/ApplicationDbContext.cs
 /Users/macke/Desktop/courseworkapp/backend/bin/Debug/net8.0/WebCoursework.deps.json
 /Users/macke/Desktop/courseworkapp/backend/bin/Debug/net8.0/WebCoursework.runtimeconfig.json
@@ -594,3 +593,4 @@
 /Users/macke/Desktop/courseworkapp/backend/obj/Debug/net8.0/WebCours.549D8BD1.Up2Date
 /Users/macke/Desktop/courseworkapp/backend/obj/Debug/net8.0/WebCoursework.genruntimeconfig.cache
 /Users/macke/Desktop/courseworkapp/backend/obj/Debug/net8.0/ref/WebCoursework.dll
+/Users/macke/Desktop/courseworkapp/backend/bin/Debug/net8.0/SportsLeague.db
