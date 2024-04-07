@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebCoursework.Models;
 
@@ -10,9 +11,11 @@ using WebCoursework.Models;
 namespace WebCoursework.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240407151728_AddBadgeURLToTeam")]
+    partial class AddBadgeURLToTeam
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
@@ -286,6 +289,7 @@ namespace WebCoursework.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("BadgeURL")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("LeagueId")
