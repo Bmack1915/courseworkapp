@@ -26,27 +26,30 @@ namespace WebCoursework.Controllers
             _logger = logger;
         }
 
-        // GET: api/Player
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Player>>> GetPlayer()
-        {
-            _logger.LogInformation("List of players successfully retrieved");
-            return await _context.Player.ToListAsync();
-        }
+        // // GET: api/Player
+        // [HttpGet]
+        // public async Task<ActionResult<IEnumerable<Player>>> GetPlayer()
+        // {
+        //     _logger.LogInformation("List of players successfully retrieved");
+        //     return await _context.Player.ToListAsync();
+        // }
 
-        // GET: api/Player/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Player>> GetPlayer(int id)
-        {
-            var player = await _context.Player.FindAsync(id);
-            if (player == null)
-            {
-                return NotFound($"A Player with Id {id} does not exist");
-            }
-           
-            _logger.LogInformation($"Player with ID: {id} successfully retrieved");
-            return player;
-        }
+       // GET: api/Player
+// GET: api/Player?teamId=5
+[HttpGet]
+public async Task<ActionResult<IEnumerable<Player>>> GetPlayer([FromQuery] int? teamId)
+{
+    if (teamId.HasValue)
+    {
+        var players = await _context.Player.Where(p => p.TeamId == teamId).ToListAsync();
+        return players;
+    }
+    else
+    {
+        var players = await _context.Player.ToListAsync();
+        return players;
+    }
+}
 
         // PUT: api/Player/5
         //[Authorize(Roles = "Admin")]
