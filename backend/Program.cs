@@ -36,6 +36,17 @@ public class Program
         //JwtToken Service
         builder.Services.AddScoped<RolesController>();
 
+        // Add CORS
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowReactApp", builder =>
+            {
+                builder.WithOrigins("http://localhost:3000") // Specify the allowed origin
+                    .AllowAnyHeader()                     // Allows all headers
+                    .AllowAnyMethod();                    // Allows all methods
+            });
+        });
+
 
         builder.Services.AddAuthentication(options =>
         {
@@ -56,8 +67,9 @@ public class Program
                 };
             });
 
-
+        
         var app = builder.Build();
+        app.UseCors("AllowReactApp");
 
         using var scope = app.Services.CreateScope();
         var services = scope.ServiceProvider;
