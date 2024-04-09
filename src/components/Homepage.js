@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
 import { Navbar } from "./Navbar";
-
+import LoginForm from "./LoginForm";
 const Homepage = () => {
   return (
     <>
@@ -42,64 +42,7 @@ const Homepage = () => {
                 className="bg-white p-4 rounded-3 shadow"
                 style={{ marginTop: "20px" }}
               >
-                <form
-                  method="POST"
-                  action="https://users.premierleague.com/accounts/login/"
-                >
-                  <h2 className="fw-bolder text-dark mb-4">Sign In</h2>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="loginUsername"
-                      className="form-label text-dark"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="loginUsername"
-                      name="login"
-                      className="form-control"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="loginPassword"
-                      className="form-label text-dark"
-                    >
-                      Password
-                    </label>
-                    <input
-                      type="password"
-                      id="loginPassword"
-                      name="password"
-                      className="form-control"
-                    />
-                  </div>
-                  <div className="d-grid gap-2">
-                    <button type="submit" className="btn btn-primary btn-lg">
-                      Sign In
-                    </button>
-                  </div>
-                  <div className="mt-3">
-                    <a
-                      href="https://users.premierleague.com/accounts/password-reset/"
-                      className="text-decoration-none"
-                      style={{ color: "#0d6efd" }}
-                    >
-                      Forgot your password?
-                    </a>
-                  </div>
-
-                  <div className="mt-3">
-                    <a
-                      href="https://users.premierleague.com/accounts/password-reset/"
-                      className="text-decoration-none"
-                      style={{ color: "#0d6efd" }}
-                    >
-                      Don't have an account? Register here
-                    </a>
-                  </div>
-                </form>
+                <LoginForm></LoginForm>
               </div>
             </div>
           </div>
