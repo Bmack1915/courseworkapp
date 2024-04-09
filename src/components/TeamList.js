@@ -39,6 +39,10 @@ const TeamList = () => {
     }
   };
 
+  handleAddPlayer = (event) => {
+    
+  };
+
   const handleTeamChange = (event) => {
     const teamId = event.target.value;
     setSelectedTeamId(teamId);

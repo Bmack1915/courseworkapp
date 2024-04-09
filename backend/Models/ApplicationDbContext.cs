@@ -18,9 +18,7 @@ namespace WebCoursework.Models
         public DbSet<WebCoursework.Models.Player> Player { get; set; } = default!;
         public DbSet<WebCoursework.Models.Team> Team { get; set; } = default!;
         public DbSet<WebCoursework.Models.Venue> Venue { get; set; } = default!;
-
-        
-
+        public DbSet<WebCoursework.Models.FantasyTeam> FantasyTeam {get; set; } = default!;
     }
 }
 

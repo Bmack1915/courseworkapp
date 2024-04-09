@@ -15,7 +15,7 @@ namespace WebCoursework.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -207,6 +207,24 @@ namespace WebCoursework.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("WebCoursework.Models.FantasyTeam", b =>
+                {
+                    b.Property<int>("FantasyTeamId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SelectedPlayerIds")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("FantasyTeamId");
+
+                    b.ToTable("FantasyTeam");
                 });
 
             modelBuilder.Entity("WebCoursework.Models.League", b =>
