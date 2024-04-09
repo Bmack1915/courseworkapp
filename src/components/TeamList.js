@@ -1,15 +1,13 @@
 import React from "react";
 import "../App.css";
-import { Navbar } from "./Navbar";
 import { API_BASE_URL } from "../apiConfig";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import useFetchTeams from "./FetchTeamsHook";
+import { get } from "./apiHandler";
 
 const TeamList = () => {
   const [teams, setTeams] = useState([]);
-  // const {teams, error} = useFetchTeams()
   const [players, setPlayers] = useState([]);
   const [selectedTeamId, setSelectedTeamId] = useState("");
   const [selectedPlayerId, setSelectedPlayerId] = useState("");
@@ -21,7 +19,7 @@ const TeamList = () => {
 
   const fetchTeams = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}team`);
+      const response = await get("team");
       console.log("Teams data:", response.data);
       setTeams(response.data);
     } catch (error) {

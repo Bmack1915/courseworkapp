@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
+import { post } from "./apiHandler";
 import { API_BASE_URL } from "../apiConfig";
-import axios from "axios";
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -10,10 +10,8 @@ const handleSubmit = async (e) => {
     Email: e.target.elements.loginUsername.value,
     Password: e.target.elements.loginPassword.value,
   };
-
   console.log(data);
-  const response = await axios.post(`${API_BASE_URL}account/login`, data);
-  console.log(response);
+  post("account/login", data);
 };
 
 const LoginForm = () => {
