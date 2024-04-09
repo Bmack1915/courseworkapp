@@ -12,7 +12,7 @@ function App() {
     <Router>
       <div className="App">
         <Navbar />
-        <StadiumMap lat={51.4826} lng={-0.0077} />
+        <MapInfo></MapInfo>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/TeamList" element={<TeamList />} />
