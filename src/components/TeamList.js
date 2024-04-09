@@ -49,8 +49,8 @@ const TeamList = () => {
             const selectedTeam = teams.find(team => team.teamId.toString() === teamId);
             if (selectedTeam) {
                 console.log("Selected Team:", selectedTeam);  // Log the entire selected team object
-                console.log("Badge URL: ", selectedTeam.badgeurl);  // Log the BadgeURL
-                setSelectedTeamBadgeUrl(`team-badges/${selectedTeam.badgeurl}`);
+                console.log("Badge URL: ", selectedTeam.badgeURL);  // Log the BadgeURL
+                setSelectedTeamBadgeUrl(`team-badges/${selectedTeam.badgeURL}`);
             } else {
                 setSelectedTeamBadgeUrl('');
                 console.log("Badge not fetched");

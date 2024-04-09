@@ -54,7 +54,7 @@ const Homepage = () => {
 
             {/* Image */}
             <div className="col-lg-4 d-none d-lg-block text-center">
-                <img className="img-fluid rounded-3 my-5" src="/team-badges/utd.png" alt="Luton Town FC Badge" />
+                <img className="img-fluid rounded-3 my-5" src="/team-badges/league.png" alt="Luton Town FC Badge" />
             </div>
 
             {/* Sign In Form */}
