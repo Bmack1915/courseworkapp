@@ -1,19 +1,22 @@
-import React from 'react';
-import CustomMap from './components/map.js';
-import Homepage from './components/Homepage.js';
-import { Navbar } from './components/Navbar.js';
-import { Footer } from './components/Footer.js';
-import TeamList from './components/TeamList.js';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Homepage from "./components/Homepage";
+import { Navbar } from "./components/Navbar";
+import TeamList from "./components/TeamList";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="App">
-       <Navbar/>
-       <Homepage></Homepage>
-      <TeamList/>
-      <Footer/>
-      
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/TeamList" element={<TeamList />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
