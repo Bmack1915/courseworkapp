@@ -31,6 +31,12 @@ export const Navbar = () => {
                 Build Team
               </Link>{" "}
             </li>
+
+            <li className="nav-item">
+              <Link to="/MapInfo" className="nav-link">
+                Team Information
+              </Link>{" "}
+            </li>
             <li className="nav-item">
               <Link to="/about" className="nav-link">
                 About
