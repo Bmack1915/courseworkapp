@@ -17,7 +17,6 @@ function App() {
           <Route path="/TeamList" element={<TeamList />} />
           <Route path="/MapInfo" element={<MapInfo />} />
         </Routes>
-
         <Footer />
       </div>
     </Router>

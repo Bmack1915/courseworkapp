@@ -2,6 +2,7 @@ import React from "react";
 import "../App.css";
 import { post } from "./apiHandler";
 import { API_BASE_URL } from "../apiConfig";
+import Cookies from "js-cookie";
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -11,7 +12,11 @@ const handleSubmit = async (e) => {
     Password: e.target.elements.loginPassword.value,
   };
   console.log(data);
-  post("account/login", data);
+  const response = await post("account/login", data);
+  const { token } = response.data;
+  Cookies.set("token", token, { expires: 0.01 });
+  console.log("token set:", token);
+  console.log(response);
 };
 
 const LoginForm = () => {

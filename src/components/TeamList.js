@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { get } from "./apiHandler";
+import AuthCheck from "./AuthCheck";
 
 const TeamList = () => {
   const [teams, setTeams] = useState([]);
@@ -65,52 +66,54 @@ const TeamList = () => {
     console.log("player selected");
   };
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-4">
-          <select
-            id="team-select"
-            className="form-control"
-            onChange={handleTeamChange}
-            value={selectedTeamId}
-          >
-            <option value="">Select a Premier League Team</option>
-            {teams.map((team) => (
-              <option key={team.teamId} value={team.teamId}>
-                {team.name}
-              </option>
-            ))}
-          </select>
-          {selectedTeamBadgeUrl && (
-            <img
-              src={selectedTeamBadgeUrl}
-              alt="Team Badge"
-              style={{ marginTop: "20px", width: "100px", height: "100px" }}
-            />
-          )}
+    <AuthCheck>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4">
+            <select
+              id="team-select"
+              className="form-control"
+              onChange={handleTeamChange}
+              value={selectedTeamId}
+            >
+              <option value="">Select a Premier League Team</option>
+              {teams.map((team) => (
+                <option key={team.teamId} value={team.teamId}>
+                  {team.name}
+                </option>
+              ))}
+            </select>
+            {selectedTeamBadgeUrl && (
+              <img
+                src={selectedTeamBadgeUrl}
+                alt="Team Badge"
+                style={{ marginTop: "20px", width: "100px", height: "100px" }}
+              />
+            )}
 
-          <ul id="player-list">
-            {players.map((player) => (
-              <li
-                key={player.PlayerId}
-                onClick={() => handlePlayerSelect(player.playerId)}
-                className={
-                  selectedPlayerId === player.playerId ? "selected" : ""
-                }
-              >
-                {player.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="col-md-8">
-          <h3>Starting Eleven</h3>
-          <ul id="starting-eleven">
-            {/* Future enhancement to add starting eleven players */}
-          </ul>
+            <ul id="player-list">
+              {players.map((player) => (
+                <li
+                  key={player.PlayerId}
+                  onClick={() => handlePlayerSelect(player.playerId)}
+                  className={
+                    selectedPlayerId === player.playerId ? "selected" : ""
+                  }
+                >
+                  {player.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="col-md-8">
+            <h3>Starting Eleven</h3>
+            <ul id="starting-eleven">
+              {/* Future enhancement to add starting eleven players */}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    </AuthCheck>
   );
 };
 export default TeamList;
