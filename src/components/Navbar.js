@@ -1,6 +1,10 @@
 import React from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
+import Logout from "./Logout";
+import Cookies from "js-cookie";
+import LoginForm from "./LoginForm";
+
 export const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -47,6 +51,9 @@ export const Navbar = () => {
                 Contact
               </Link>
             </li>
+            <nav className="nav-item">
+              <Logout></Logout>
+            </nav>
           </ul>
         </div>
       </div>

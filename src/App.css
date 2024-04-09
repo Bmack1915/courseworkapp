@@ -20,6 +20,32 @@
   cursor: pointer;
   border-left: 5px solid blue;
 }
+.tab-container {
+  display: flex; /* Ensures that the container uses a flexible display */
+  justify-content: space-between; /* Distributes space between buttons */
+  flex-wrap: nowrap; /* Prevents wrapping of buttons to the next line */
+  padding: 10px; /* Optional padding around the container */
+}
+
+.btn {
+  flex-grow: 1; /* Allows buttons to grow and fill the container */
+  margin: 0.5%; /* Small margin for spacing, adjust as needed */
+  font-size: 16px; /* Fixed font size for all buttons */
+  text-align: center; /* Centers text inside the button */
+}
+
+.btn-primary,
+.btn-secondary {
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.btn-primary {
+  color: white; /* Text color for active button */
+}
+
+.btn-secondary {
+  color: gray; /* Text color for inactive buttons */
+}
 
 li {
   padding: 8px 16px;

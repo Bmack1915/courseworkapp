@@ -5,7 +5,7 @@ import { API_BASE_URL } from "../apiConfig"; // Confirm this path is correct
 
 const MapInfo = () => {
   const [teams, setTeams] = useState([]);
-  const [selectedTeam, setSelectedTeam] = useState(null);
+  const [selectedTeam, setSelectedTeam] = useState([]);
 
   useEffect(() => {
     fetchTeams();
@@ -16,6 +16,9 @@ const MapInfo = () => {
       const response = await axios.get(`${API_BASE_URL}team`);
       console.log("Teams data:", response.data);
       setTeams(response.data);
+      if (response.data.length > 0) {
+        setSelectedTeam(response.data[0]);
+      }
     } catch (error) {
       console.error("Error fetching teams:", error);
     }
@@ -23,38 +26,42 @@ const MapInfo = () => {
 
   return (
     <div>
-      <h1>Team Maps</h1>
+      <h1 className="header-title"> Team Information</h1>
+      <h2>Select a team to see more information</h2>
       <div className="container">
-        <div className="tab-container">
+        <div className="tab-container d-flex justify-content-between">
           {teams.map((team) => (
             <button
               key={team.teamId}
               onClick={() => setSelectedTeam(team)}
-              style={{
-                cursor: "pointer",
-                padding: "10px 20px",
-                margin: "0 5px",
-                background:
-                  selectedTeam && selectedTeam.teamId === team.teamId
-                    ? "navy"
-                    : "gray",
-                color: "white",
-                border: "none",
-                borderBottom:
-                  selectedTeam && selectedTeam.teamId === team.teamId
-                    ? "3px solid blue"
-                    : "3px solid transparent",
-              }}
+              className={`btn ${
+                selectedTeam && selectedTeam.teamId === team.teamId
+                  ? "btn-dark"
+                  : "btn-light"
+              } m-1 flex-fill`}
             >
               {team.name}
             </button>
           ))}
         </div>
+
         <div className="d-flex w-100 justify-content-between">
           <div className="team-info w-50">
             {selectedTeam && (
               <>
-                <h1>{selectedTeam.name}</h1>
+                <div>
+                  <h1>{selectedTeam.name}</h1>
+                  <img
+                    src={`team-badges/${selectedTeam.badgeURL}`}
+                    alt="Team Badge"
+                    style={{
+                      marginTop: "20px",
+                      width: "100px",
+                      height: "100px",
+                    }}
+                  />
+                </div>
+
                 <p>{selectedTeam.description || "No description available."}</p>
               </>
             )}
