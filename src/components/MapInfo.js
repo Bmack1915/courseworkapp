@@ -1,44 +1,54 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import StadiumMap from "./StadiumMap";
-
-const API_BASE_URL = "https://your-api-url.com/"; // Replace with your actual base URL
+import { API_BASE_URL } from "../apiConfig";
 
 const MapInfo = () => {
   const [teams, setTeams] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState(null);
 
   useEffect(() => {
-    const fetchTeams = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}team`);
-        console.log("Teams data:", response.data);
-        setTeams(response.data);
-        if (response.data.length > 0) {
-          setSelectedTeam(response.data[0]);
-        }
-      } catch (error) {
-        console.error("Error fetching teams:", error);
-      }
-    };
-
     fetchTeams();
   }, []);
+
+  const fetchTeams = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}team`);
+      console.log("Teams data:", response.data);
+      setTeams(response.data);
+    } catch (error) {
+      console.error("Error fetching teams:", error);
+    }
+  };
 
   return (
     <div>
       <h1>Team Maps</h1>
-      <ul>
+      <div className="tab-container">
         {teams.map((team) => (
-          <li
-            key={team.id}
+          <button
+            key={team.teamId}
             onClick={() => setSelectedTeam(team)}
-            style={{ cursor: "pointer" }}
+            style={{
+              cursor: "pointer",
+              padding: "10px 20px",
+              margin: "0 5px",
+              background:
+                selectedTeam && selectedTeam.teamId === team.teamId
+                  ? "navy"
+                  : "gray",
+              color: "white",
+              border: "none",
+              borderBottom:
+                selectedTeam && selectedTeam.teamId === team.teamId
+                  ? "3px solid blue"
+                  : "3px solid transparent",
+            }}
           >
             {team.name}
-          </li>
+          </button>
         ))}
-      </ul>
+      </div>
       {selectedTeam && (
         <StadiumMap lat={selectedTeam.lat} lng={selectedTeam.lng} />
       )}

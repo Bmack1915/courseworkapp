@@ -14,10 +14,3 @@ const StadiumMap = ({ lat, lng }) => (
 );
 
 export default StadiumMap;
-
-// const root = createRoot(document.querySelector("#app"));
-// root.render(
-//   <React.StrictMode>
-//     <StadiumMap />
-//   </React.StrictMode>
-// );

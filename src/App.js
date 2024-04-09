@@ -12,7 +12,6 @@ function App() {
     <Router>
       <div className="App">
         <Navbar />
-        <MapInfo></MapInfo>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/TeamList" element={<TeamList />} />
