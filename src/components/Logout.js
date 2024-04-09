@@ -13,7 +13,11 @@ const Logout = () => {
 
   // Check if token exists to render logout button
 
-  return <button onClick={handleLogOut}>Log Out</button>;
+  return (
+    <button className="btn-secondary" onClick={handleLogOut}>
+      Log Out
+    </button>
+  );
 };
 
 export default Logout;

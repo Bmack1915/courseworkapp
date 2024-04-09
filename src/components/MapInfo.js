@@ -29,7 +29,7 @@ const MapInfo = () => {
       <h1 className="header-title"> Team Information</h1>
       <h2>Select a team to see more information</h2>
       <div className="container">
-        <div className="tab-container d-flex justify-content-between">
+        <div className="tab-container overflow-auto">
           {teams.map((team) => (
             <button
               key={team.teamId}
@@ -49,8 +49,14 @@ const MapInfo = () => {
           <div className="team-info w-50">
             {selectedTeam && (
               <>
-                <div>
-                  <h1>{selectedTeam.name}</h1>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "50px",
+                  }}
+                >
                   <img
                     src={`team-badges/${selectedTeam.badgeURL}`}
                     alt="Team Badge"
@@ -58,11 +64,15 @@ const MapInfo = () => {
                       marginTop: "20px",
                       width: "100px",
                       height: "100px",
+                      objectFit: "contain",
                     }}
                   />
+                  <h1>{selectedTeam.name}</h1>
                 </div>
 
-                <p>{selectedTeam.description || "No description available."}</p>
+                <p className="pt-3">
+                  {selectedTeam.description || "No description available."}
+                </p>
               </>
             )}
           </div>

@@ -12,18 +12,17 @@ const handleSubmit = async (e) => {
     Password: e.target.elements.loginPassword.value,
   };
   console.log(data);
-  const response = await post("account/login", data);
+  const response = await post("account/register", data);
   const { token } = response.data;
-  Cookies.set("token", token, { expires: 0.01 });
+  Cookies.set("token", token, { expires: 1 });
   console.log("token set:", token);
-  window.location.reload();
   console.log(response);
 };
 
-const LoginForm = ({ setFormFunction }) => {
+const RegisterForm = ({ setFormFunction }) => {
   return (
     <form method="POST" onSubmit={handleSubmit}>
-      <h2 className="fw-bolder text-dark mb-4">Sign In</h2>
+      <h2 className="fw-bolder text-dark mb-4">Register</h2>
       <div className="mb-3">
         <label htmlFor="loginUsername" className="form-label text-dark">
           Email
@@ -48,30 +47,21 @@ const LoginForm = ({ setFormFunction }) => {
       </div>
       <div className="d-grid gap-2">
         <button type="submit" className="btn btn-primary btn-lg">
-          Sign In
+          Register
         </button>
-      </div>
-      <div className="mt-3">
-        <a
-          onClick={() => setFormFunction("")}
-          className="text-decoration-none"
-          style={{ color: "#0d6efd", cursor: "pointer" }}
-        >
-          Forgot your password?
-        </a>
       </div>
 
       <div className="mt-3">
         <a
-          onClick={() => setFormFunction("register")}
+          onClick={() => setFormFunction("login")}
           className="text-decoration-none"
           style={{ color: "#0d6efd", cursor: "pointer" }}
         >
-          Don't have an account? Register here
+          Already have an account? Login here
         </a>
       </div>
     </form>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

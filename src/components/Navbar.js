@@ -51,9 +51,7 @@ export const Navbar = () => {
                 Contact
               </Link>
             </li>
-            <nav className="nav-item">
-              <Logout></Logout>
-            </nav>
+            <Logout></Logout>
           </ul>
         </div>
       </div>

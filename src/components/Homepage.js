@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
-import { Navbar } from "./Navbar";
-import LoginForm from "./LoginForm";
+import AccountForm from "./AccountForm";
+
 const Homepage = () => {
   return (
     <>
@@ -38,12 +38,7 @@ const Homepage = () => {
             </div>
 
             <div className="col-lg-4">
-              <div
-                className="bg-white p-4 rounded-3 shadow"
-                style={{ marginTop: "20px" }}
-              >
-                <LoginForm></LoginForm>
-              </div>
+              <AccountForm />
             </div>
           </div>
         </div>
