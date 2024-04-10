@@ -19,12 +19,12 @@ namespace IdentityPractice.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly EmailService _emailService;
         private readonly IConfiguration _configuration;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, EmailService emailService, IConfiguration configuration)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, EmailService emailService, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -36,12 +36,12 @@ namespace IdentityPractice.Controllers
         public async Task<IActionResult> Register(AuthModel model)
         {
             var user = new IdentityUser { UserName = model.Email, Email = model.Email };
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync((ApplicationUser)user, model.Password);
 
             if (result.Succeeded)
             {
                 // Generate an email verification token
-                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync((ApplicationUser)user);
 
                 // Create the verification link
                 var verificationLink = Url.Action("VerifyEmail", "Account", new { userId = user.Id, token = token }, Request.Scheme);

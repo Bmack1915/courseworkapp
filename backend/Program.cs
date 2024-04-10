@@ -22,9 +22,12 @@ public class Program
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
        options.UseSqlite(builder.Configuration.GetConnectionString("Connection")));
 
+        builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddDefaultTokenProviders();
         //Register Identity
-        builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-        .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+        // builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+        // .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
         //Register logger
         builder.Services.AddLogging(action => action.AddConsole());

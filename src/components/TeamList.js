@@ -4,7 +4,7 @@ import { API_BASE_URL } from "../apiConfig";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import { get } from "./apiHandler";
+import { get, post } from "./apiHandler";
 import AuthCheck from "./AuthCheck";
 
 const TeamList = () => {
@@ -39,8 +39,25 @@ const TeamList = () => {
     }
   };
 
-  handleAddPlayer = (event) => {
-    
+  const handleAddPlayer = async (e) => {
+    if (!selectedPlayerId) {
+      alert("Please select a player first.");
+      return;
+    }
+    try {
+      e.preventDefault();
+      console.log(e);
+      const body = {
+        Email: e.target.elements.loginUsername.value,
+        selectedPlayerId,
+      };
+      const response = await axios.post("applicationuser/addplayer", body);
+      console.log("Player added successfully:", response.data);
+      alert("Player added successfully!");
+    } catch (error) {
+      console.error("Error adding player:", error);
+      alert("Failed to add player.");
+    }
   };
 
   const handleTeamChange = (event) => {
@@ -111,9 +128,13 @@ const TeamList = () => {
           </div>
           <div className="col-md-8">
             <h3>Starting Eleven</h3>
-            <ul id="starting-eleven">
-              {/* Future enhancement to add starting eleven players */}
-            </ul>
+            <ul></ul>
+          </div>
+
+          <div>
+            <button className="btn-secondary" onClick={handleAddPlayer}>
+              Add Player
+            </button>
           </div>
         </div>
       </div>

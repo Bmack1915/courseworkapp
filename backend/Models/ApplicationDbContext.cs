@@ -7,7 +7,7 @@ using WebCoursework.Models;
 
 namespace WebCoursework.Models
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -18,7 +18,6 @@ namespace WebCoursework.Models
         public DbSet<WebCoursework.Models.Player> Player { get; set; } = default!;
         public DbSet<WebCoursework.Models.Team> Team { get; set; } = default!;
         public DbSet<WebCoursework.Models.Venue> Venue { get; set; } = default!;
-        public DbSet<WebCoursework.Models.FantasyTeam> FantasyTeam {get; set; } = default!;
     }
 }
 

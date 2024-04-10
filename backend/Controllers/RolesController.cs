@@ -16,9 +16,9 @@ namespace WebCoursework.Controllers
     public class RolesController : ControllerBase
     {
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -44,18 +44,18 @@ namespace WebCoursework.Controllers
             return Ok(role);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateRole([FromBody] string roleName)
-        {
-            var role = new IdentityRole(roleName);
-            var result = await _roleManager.CreateAsync(role);
+        // [HttpPost]
+        // public async Task<IActionResult> CreateRole([FromBody] string roleName)
+        // {
+        //     var role = new IdentityRole(roleName);
+        //     var result = await _roleManager.CreateAsync(role);
 
-            if (result.Succeeded)
-            {
-                return Ok("Role created successfully.");
-            }
-            return BadRequest(result.Errors);
-        }
+        //     if (result.Succeeded)
+        //     {
+        //         return Ok("Role created successfully.");
+        //     }
+        //     return BadRequest(result.Errors);
+        // }
 
         [HttpPut]
         public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleModel model)

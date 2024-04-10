@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using System;
 using Microsoft.Identity.Client;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebCoursework.Models
 {
@@ -10,6 +11,7 @@ namespace WebCoursework.Models
     {
         public int FantasyTeamId { get; set; }  
         public int UserId { get; set; }
-        public string SelectedPlayerIds { get; set; } // Stores player IDs as a comma-separated string
+        public string SelectedPlayerIds { get; set; } //CSV stored values
+
     }
 }

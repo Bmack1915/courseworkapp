@@ -16,8 +16,8 @@ const handleSubmit = async (e) => {
   const { token } = response.data;
   Cookies.set("token", token, { expires: 0.01 });
   console.log("token set:", token);
-  window.location.reload();
   console.log(response);
+  window.location.reload();
 };
 
 const LoginForm = ({ setFormFunction }) => {
