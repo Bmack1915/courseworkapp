@@ -35,13 +35,13 @@ namespace IdentityPractice.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(AuthModel model)
         {
-            var user = new IdentityUser { UserName = model.Email, Email = model.Email };
-            var result = await _userManager.CreateAsync((ApplicationUser)user, model.Password);
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
                 // Generate an email verification token
-                var token = await _userManager.GenerateEmailConfirmationTokenAsync((ApplicationUser)user);
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
                 // Create the verification link
                 var verificationLink = Url.Action("VerifyEmail", "Account", new { userId = user.Id, token = token }, Request.Scheme);
