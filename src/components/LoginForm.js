@@ -6,18 +6,23 @@ import Cookies from "js-cookie";
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  console.log(e);
   const data = {
     Email: e.target.elements.loginUsername.value,
     Password: e.target.elements.loginPassword.value,
   };
-  console.log(data);
-  const response = await post("account/login", data);
-  const { token } = response.data;
-  Cookies.set("token", token, { expires: 0.01 });
-  console.log("token set:", token);
-  console.log(response);
-  window.location.reload();
+  try {
+    const response = await post("account/login", data);
+    const { token } = response.data;
+    Cookies.set("token", token, { expires: 0.01 });
+    window.location.reload();
+  } catch (error) {
+    if (error.response && error.response.status === 401) {
+      alert("Invalid username or password. Please try again.");
+    } else {
+      alert("An error occurred. Please try again later.");
+    }
+    console.error("Login error:", error);
+  }
 };
 
 const LoginForm = ({ setFormFunction }) => {

@@ -131,6 +131,8 @@ const TeamList = () => {
     }
   };
 
+  const isFantasyTeamFull = () => {};
+
   return (
     <AuthCheck>
       <div className="container">
@@ -225,6 +227,17 @@ const TeamList = () => {
             disabled={!isFantasyPlayerSelected(selectedPlayerToRemove)}
           >
             Remove Player
+          </button>
+
+          <button
+            className="btn btn-success"
+            style={{
+              backgroundColor: isFantasyTeamFull() ? "lightblue" : "black",
+            }}
+            onClick={handleRemovePlayer}
+            disabled={!isFantasyTeamFull()}
+          >
+            Save Team
           </button>
         </div>
       </div>

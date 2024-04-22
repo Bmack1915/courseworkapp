@@ -8,7 +8,7 @@ const Footer = () => {
         <div class="row align-items-center justify-content-between flex-column flex-sm-row">
           <div class="col-auto">
             <div class="small m-0 text-white">
-              Copyright &copy; Your Website 2023
+              Copyright &copy; University of Westminster 2024
             </div>
           </div>
           <div class="col-auto">

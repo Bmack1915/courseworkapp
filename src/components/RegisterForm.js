@@ -12,11 +12,25 @@ const handleSubmit = async (e) => {
     Password: e.target.elements.loginPassword.value,
   };
   console.log(data);
-  const response = await post("account/register", data);
-  const { token } = response.data;
-  Cookies.set("token", token, { expires: 1 });
-  console.log("token set:", token);
-  console.log(response);
+  try {
+    const response = await post("account/register", data);
+    const { token } = response.data;
+    Cookies.set("token", token, { expires: 1 });
+    console.log("token set:", token);
+    console.log(response);
+    await post("account/login", data);
+    window.location.reload();
+    alert("Successfully registered and logged in!");
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      alert(
+        "Invalid username or password. Please try again. Passwords must have at least one non alphanumeric character and atleast one uppercase and lowercase character"
+      );
+    } else {
+      alert("An error occurred. Please try again later.");
+    }
+    console.error("Login error:", error);
+  }
 };
 
 const RegisterForm = ({ setFormFunction }) => {

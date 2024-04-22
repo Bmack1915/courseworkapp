@@ -101,7 +101,7 @@ const Homepage = () => {
                         For press inquiries, email us at
                         <br />
                         <a href="mailto:looksmaxxing@gmail.com">
-                          looksmaxxing@gmail.com
+                          premierleaguefantasy@demo.com
                         </a>
                       </p>
                       <div className="h6 fw-bolder">Follow us</div>

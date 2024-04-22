@@ -16,6 +16,7 @@ const MapInfo = () => {
       const response = await axios.get(`${API_BASE_URL}team`);
       console.log("Teams data:", response.data);
       setTeams(response.data);
+
       if (response.data.length > 0) {
         setSelectedTeam(response.data[0]);
       }
