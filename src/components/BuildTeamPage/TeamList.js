@@ -20,6 +20,9 @@ const TeamList = () => {
   const [selectedPlayerToRemove, setSelectedPlayerToRemove] = useState(null);
   const [selectedTeamBadgeUrl, setSelectedTeamBadgeUrl] = useState("");
 
+  const isFantasyTeamFull = () => {
+    return fantasyPlayers.length === 11;
+  };
   useEffect(() => {
     fetchTeams();
     fetchPlayersByTeamId(1);
@@ -63,6 +66,10 @@ const TeamList = () => {
   const handleAddPlayer = async (e) => {
     if (!selectedPlayerToAdd) {
       alert("Please select a player first.");
+      return;
+    }
+    if (isFantasyTeamFull()) {
+      alert("You cannot add more than 11 players");
       return;
     }
     dispatch(addPlayer(selectedPlayerToAdd));
@@ -130,8 +137,6 @@ const TeamList = () => {
       setSelectedPlayerToRemove(player);
     }
   };
-
-  const isFantasyTeamFull = () => {};
 
   return (
     <AuthCheck>
@@ -211,7 +216,9 @@ const TeamList = () => {
                 : "black",
             }}
             onClick={handleAddPlayer}
-            disabled={isPlayerSelected(selectedPlayerToAdd)}
+            disabled={
+              isPlayerSelected(selectedPlayerToAdd) || isFantasyTeamFull()
+            }
           >
             Add Player
           </button>
@@ -234,7 +241,7 @@ const TeamList = () => {
             style={{
               backgroundColor: isFantasyTeamFull() ? "lightblue" : "black",
             }}
-            onClick={handleRemovePlayer}
+            onClick={SavePlayersToDb}
             disabled={!isFantasyTeamFull()}
           >
             Save Team

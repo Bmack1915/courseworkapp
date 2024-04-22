@@ -26,49 +26,55 @@ namespace backend.Controllers
         {
             var users = _userManager.Users;
             return Ok(users);
-        }
-
-        [HttpPost("AddPlayer")]
-        public async Task<IActionResult> AddPlayer([FromBody] PlayerAddModel model)
+                }
+        [HttpPost("AddPlayers")]
+        public async Task<IActionResult> AddPlayers([FromBody] PlayerAddModel model)
         {
-            // Find the user by ID using UserManager, find email from front end response once logged in
+            // Find the user by email, check if they exist on the system
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 return NotFound("User not found.");
             }
 
-            // Add player ID to the user's SelectedPlayerIds property
-            if (string.IsNullOrEmpty(user.SelectedPlayerIds))
+            //Get the users existing team (CSV string of player Ids).
+            var existingPlayerIds = new List<string>();
+            if (!string.IsNullOrEmpty(user.SelectedPlayerIds))
             {
-                user.SelectedPlayerIds = model.PlayerId;
+                existingPlayerIds = user.SelectedPlayerIds.Split(',').ToList();
             }
-            else
+
+            //Get new players IDs sent from from end via PlayerAddModel
+            var incomingPlayerIds = model.PlayerIds.Split(',').ToList();
+            foreach (var playerId in incomingPlayerIds)
             {
-                var playerIds = user.SelectedPlayerIds.Split(',').ToList();
-                if (playerIds.Count > 11)
+                if (!existingPlayerIds.Contains(playerId))
                 {
-                    return BadRequest("A team cannot have more than 11 players");
-                }
-                if (!playerIds.Contains(model.PlayerId))
-                {
-                    playerIds.Add(model.PlayerId);
-                    user.SelectedPlayerIds = string.Join(",", playerIds); // Join back to CSV string
+                    existingPlayerIds.Add(playerId);
                 }
                 else
                 {
-                    return BadRequest("Player already added.");
+                    return BadRequest($"Player with ID {playerId} is already added.");
                 }
             }
 
-            var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
+            // Update the user's SelectedPlayerIds
+            user.SelectedPlayerIds = string.Join(",", existingPlayerIds);
 
-            return Ok("Player added successfully.");
+            // Save changes using UserManager
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return Ok($"Updated player list for user {user.Email}.");
+            }
+            else
+            {
+                return BadRequest("Failed to update player list.");
+            }
         }
+
+
+
 
         [HttpPost("RemovePlayer")]
         public async Task<IActionResult> RemovePlayer([FromBody] PlayerAddModel model)

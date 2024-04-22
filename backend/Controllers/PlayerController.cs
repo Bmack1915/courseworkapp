@@ -25,17 +25,7 @@ namespace WebCoursework.Controllers
             _context = context;
             _logger = logger;
         }
-
-        // // GET: api/Player
-        // [HttpGet]
-        // public async Task<ActionResult<IEnumerable<Player>>> GetPlayer()
-        // {
-        //     _logger.LogInformation("List of players successfully retrieved");
-        //     return await _context.Player.ToListAsync();
-        // }
-
-       // GET: api/Player
-// GET: api/Player?teamId=5
+        
 [HttpGet]
 public async Task<ActionResult<IEnumerable<Player>>> GetPlayer([FromQuery] int? teamId)
 {
