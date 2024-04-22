@@ -29,10 +29,10 @@ namespace backend.Controllers
         }
 
         [HttpPost("AddPlayer")]
-        public async Task<IActionResult> AddPlayer(string email, string playerId)
+        public async Task<IActionResult> AddPlayer([FromBody] PlayerAddModel model)
         {
             // Find the user by ID using UserManager, find email from front end response once logged in
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 return NotFound("User not found.");
@@ -41,7 +41,7 @@ namespace backend.Controllers
             // Add player ID to the user's SelectedPlayerIds property
             if (string.IsNullOrEmpty(user.SelectedPlayerIds))
             {
-                user.SelectedPlayerIds = playerId;
+                user.SelectedPlayerIds = model.PlayerId;
             }
             else
             {
@@ -50,9 +50,9 @@ namespace backend.Controllers
                 {
                     return BadRequest("A team cannot have more than 11 players");
                 }
-                if (!playerIds.Contains(playerId))
+                if (!playerIds.Contains(model.PlayerId))
                 {
-                    playerIds.Add(playerId);
+                    playerIds.Add(model.PlayerId);
                     user.SelectedPlayerIds = string.Join(",", playerIds); // Join back to CSV string
                 }
                 else
@@ -69,5 +69,44 @@ namespace backend.Controllers
 
             return Ok("Player added successfully.");
         }
+
+        [HttpPost("RemovePlayer")]
+        public async Task<IActionResult> RemovePlayer([FromBody] PlayerAddModel model)
+        {
+            // Find the user by ID using UserManager, find email from front end response once logged in
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            if (string.IsNullOrEmpty(user.SelectedPlayerIds))
+            {
+                return BadRequest("The team has no players to remove.");
+            }
+            else
+            {
+                var playerIds = user.SelectedPlayerIds.Split(',').ToList();
+                if (playerIds.Contains(model.PlayerId))
+                {
+                    playerIds.Remove(model.PlayerId);
+                    user.SelectedPlayerIds = string.Join(",", playerIds); // Join back to CSV string
+                }
+                else
+                {
+                    return BadRequest("Player not on the team");
+                }
+            }
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest("HELLO" + result.Errors);
+            }
+
+            return Ok("Player removed successfully.");
+        }
+
+
     }
 }

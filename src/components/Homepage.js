@@ -5,14 +5,14 @@ import AccountForm from "./AccountForm";
 const Homepage = () => {
   return (
     <>
-      <header className="bg-dark py-5">
+      <header className="bg-light py-5">
         <div className="container px-5">
           <div className="row gx-5 align-items-center justify-content-between">
             <div className="col-lg-4 text-center text-lg-start">
-              <h1 className="display-5 fw-bolder text-white mb-2">
+              <h1 className="display-5 fw-bolder text-black mb-2">
                 Premier League Fantasy
               </h1>
-              <p className="lead fw-normal text-white-50 mb-4">
+              <p className="lead fw-normal text-black-50 mb-4">
                 Welcome to Premier League Fantasy! Create your dream fantasy
                 team TODAY!
               </p>
@@ -44,17 +44,17 @@ const Homepage = () => {
         </div>
       </header>
 
-      <section className="py-5 bg-light">
+      <section className="py-5 bg-dark">
         <div className="container px-5">
           <div className="row gx-5">
             <div className="col-xl-8">
-              <h2 className="fw-bolder fs-5 mb-4">Features</h2>
+              <h2 className="fw-bolder fs-5 mb-4 text-white">Features</h2>
 
               <div className="mb-4">
-                <a className="link-dark" href="#!">
-                  <h3>Create and Customize Your Dream Team</h3>
-                </a>
-                <p className="text-left">
+                <h3 className="text-white">
+                  Create and Customize Your Dream Team
+                </h3>
+                <p className="text-left text-white">
                   Build your ultimate fantasy team by selecting players from the
                   Premier League. Customize your team name, logo, and jersey to
                   stand out in the league.
@@ -62,10 +62,10 @@ const Homepage = () => {
               </div>
 
               <div className="mb-5">
-                <a className="link-dark" href="#!">
-                  <h3>Access Real-time Player Stats and Analytics</h3>
-                </a>
-                <p className="text-left">
+                <h3 className="text-white">
+                  Access Real-time Player Stats and Analytics
+                </h3>
+                <p className="text-left text-white">
                   Make informed decisions with up-to-date player statistics,
                   health updates, and performance analytics. Stay ahead of the
                   game with our comprehensive player insights.
@@ -73,10 +73,10 @@ const Homepage = () => {
               </div>
 
               <div className="mb-5">
-                <a className="link-dark" href="#!">
-                  <h3>Compete in Weekly Challenges and Earn Rewards</h3>
-                </a>
-                <p className="text-left">
+                <h3 className="text-white">
+                  Compete in Weekly Challenges and Earn Rewards
+                </h3>
+                <p className="text-left text-white">
                   Engage in weekly challenges against friends and other fantasy
                   managers. Climb the leaderboard and win exclusive rewards
                   based on your team's performance.
