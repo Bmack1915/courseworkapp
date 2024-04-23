@@ -64,15 +64,6 @@ const LoginForm = ({ setFormFunction }) => {
       </div>
       <div className="mt-3">
         <a
-          onClick={() => setFormFunction("")}
-          className="text-decoration-none"
-          style={{ color: "#0d6efd", cursor: "pointer" }}
-        >
-          Forgot your password?
-        </a>
-      </div>
-      <div className="mt-3">
-        <a
           onClick={() => setFormFunction("register")}
           className="text-decoration-none"
           style={{ color: "#0d6efd", cursor: "pointer" }}

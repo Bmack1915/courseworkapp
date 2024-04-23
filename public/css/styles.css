@@ -8389,6 +8389,16 @@ fieldset:disabled .btn {
   color: rgba(var(--bs-light-rgb), var(--bs-text-opacity)) !important;
 }
 
+.account-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  min-height: 
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+
 .text-dark {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-dark-rgb), var(--bs-text-opacity)) !important;

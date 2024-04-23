@@ -2,8 +2,6 @@ import React from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 import Logout from "./Logout";
-import Cookies from "js-cookie";
-import LoginForm from "./LoginForm";
 
 export const Navbar = () => {
   return (
@@ -40,11 +38,6 @@ export const Navbar = () => {
               <Link to="/MapInfo" className="nav-link">
                 Team Information
               </Link>{" "}
-            </li>
-            <li className="nav-item">
-              <Link to="/about" className="nav-link">
-                About
-              </Link>
             </li>
             <li className="nav-item">
               <Link to="/contact" className="nav-link">
