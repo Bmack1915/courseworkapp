@@ -4,7 +4,7 @@ import { API_BASE_URL } from "../../apiConfig";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import { get, post, remove, getTeams } from "../apiHandler";
+import { get, post, remove, getTeams, put } from "../apiHandler";
 import AuthCheck from "../AuthCheck";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -69,7 +69,6 @@ const TeamList = () => {
   };
 
   const fetchFantasyTeam = async () => {
-    console.log(email);
     try {
       const response = await getTeams("applicationuser/getplayerids", email);
       const playerIDs = response.data.split(",");
@@ -79,15 +78,15 @@ const TeamList = () => {
           return playerResponse.data;
         })
       );
-      console.log(playerObjects);
       dispatch(setFantasyPlayers(playerObjects));
     } catch (error) {
       console.error("Failed to fetch fantasy team:", error);
     }
   };
 
+  // const getFantasyPlayer = async();
+
   const resetFantasyTeam = async () => {
-    console.log(email);
     try {
       await remove("applicationuser", email);
       console.log("Team successfully deleted");
@@ -120,26 +119,30 @@ const TeamList = () => {
     setSelectedPlayerToRemove(null);
   };
 
+  //If fantasy team not null, put the team. If null use post to "create" first time
+
   const SavePlayersToDb = async (e) => {
     const playerIDs = fantasyPlayers.map((player) => player.playerId);
     const playerIDsString = playerIDs.join(",");
     try {
       e.preventDefault();
-      console.log(e);
       const body = {
         Email: email,
         PlayerIDs: playerIDsString,
       };
-
-      console.log(body);
-      const response = await post("applicationuser/addplayers", body);
-      console.log("Team added successfully:", response.data);
+      console.log(fantasyPlayers);
+      if (fantasyPlayers.length < 1) {
+        await post("applicationuser/addplayers", body);
+      } else {
+        await put("applicationuser/addplayers", body);
+      }
       alert("Team added successfully!");
     } catch (error) {
       if (error.response && error.response.status === 400) {
         alert(
           "You already have a fantasy team. Please reset it to create a new one."
         );
+        console.log(error.response);
       }
     }
   };
@@ -153,12 +156,9 @@ const TeamList = () => {
         (team) => team.teamId.toString() === teamId
       );
       if (selectedTeam) {
-        console.log("Selected Team:", selectedTeam);
-        console.log("Badge URL: ", selectedTeam.badgeURL);
         setSelectedTeamBadgeUrl(`team-badges/${selectedTeam.badgeURL}`);
       } else {
         setSelectedTeamBadgeUrl("");
-        console.log("Badge not fetched");
       }
     } else {
       setTeamPlayers([]);
@@ -180,7 +180,7 @@ const TeamList = () => {
 
   return (
     <AuthCheck>
-      <section class="py-5 bg-dark" id="features">
+      <section class="py-5 bg-dark mb-4" id="features">
         <div class="container px-4 my-1">
           <div class="row gx-5">
             <div class="col-lg-4 mb-5 mb-lg-0">
@@ -232,7 +232,7 @@ const TeamList = () => {
               <img
                 src={selectedTeamBadgeUrl}
                 alt="Team Badge"
-                className="mt-3 img-fluid"
+                className="mt-3 img-fluid object-fit-contain"
                 style={{ width: "100px", height: "100px" }}
               />
             )}

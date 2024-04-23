@@ -69,30 +69,7 @@ namespace backend.Controllers
             {
                 return NotFound("User not found.");
             }
-
-            //Get the users existing team (CSV string of player Ids).
-            var existingPlayerIds = new List<string>();
-            if (!string.IsNullOrEmpty(user.SelectedPlayerIds))
-            {
-                existingPlayerIds = user.SelectedPlayerIds.Split(',').ToList();
-            }
-
-            //Get new players IDs sent from from end via PlayerAddModel
-            var incomingPlayerIds = model.PlayerIds.Split(',').ToList();
-            foreach (var playerId in incomingPlayerIds)
-            {
-                if (!existingPlayerIds.Contains(playerId))
-                {
-                    existingPlayerIds.Add(playerId);
-                }
-                else
-                {
-                    return BadRequest($"Player with ID {playerId} is already added.");
-                }
-            }
-
-            // Update the user's SelectedPlayerIds
-            user.SelectedPlayerIds = string.Join(",", existingPlayerIds);
+            user.SelectedPlayerIds =  model.PlayerIds;
 
             // Save changes using UserManager
             var result = await _userManager.UpdateAsync(user);
@@ -105,6 +82,31 @@ namespace backend.Controllers
                 return BadRequest("Failed to update player list.");
             }
         }
+
+      
+        [HttpPut("AddPlayers")]
+        public async Task<IActionResult> EditPlayers([FromBody] PlayerAddModel model)
+        {
+            // Find the user by email, check if they exist on the system
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+            user.SelectedPlayerIds =  model.PlayerIds;
+
+            // Save changes using UserManager
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return Ok($"Updated player list for user {user.Email}.");
+            }
+            else
+            {
+                return BadRequest("Failed to update player list.");
+            }
+        }
+
 
         [HttpPost("RemovePlayer")]
         public async Task<IActionResult> RemovePlayer([FromBody] PlayerAddModel model)

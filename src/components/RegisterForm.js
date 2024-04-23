@@ -6,18 +6,14 @@ import Cookies from "js-cookie";
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  console.log(e);
   const data = {
     Email: e.target.elements.loginUsername.value,
     Password: e.target.elements.loginPassword.value,
   };
-  console.log(data);
   try {
     const response = await post("account/register", data);
     const { token } = response.data;
     Cookies.set("token", token, { expires: 1 });
-    console.log("token set:", token);
-    console.log(response);
     await post("account/login", data);
     window.location.reload();
     alert("Successfully registered and logged in!");

@@ -38,7 +38,7 @@ const Features = () => {
             <div className="text-end mb-5 mb-xl-0">
               <Link
                 to="/MapInfo"
-                className="bi bi-arrow-right ext-decoration-none"
+                className="bi bi-arrow-right text-decoration-none"
               >
                 Get Started
               </Link>

@@ -99,8 +99,8 @@ const MapInfo = () => {
                         objectFit: "contain",
                       }}
                     />
-                    <h1>{selectedTeam.name}</h1>
-                    <p className="px-5 text-center lead w-100 fs-3">
+                    <h2>{selectedTeam.name}</h2>
+                    <p className="px-5 text-center lead w-100 fs-15">
                       {selectedTeam.description || "No description available."}
                     </p>
                   </div>

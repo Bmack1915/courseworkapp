@@ -8392,12 +8392,15 @@ fieldset:disabled .btn {
 .account-form-container {
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  min-height: 
+  justify-content: center;
+  min-height: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
+.object-fit-contain {
+  object-fit: contain;
+}
 
 .text-dark {
   --bs-text-opacity: 1;
