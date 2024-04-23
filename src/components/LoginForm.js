@@ -1,31 +1,37 @@
 import React from "react";
 import "../App.css";
-import { post } from "./apiHandler";
-import { API_BASE_URL } from "../apiConfig";
+import { useDispatch } from "react-redux";
+import { setEmail } from "../redux/emailSlice";
 import Cookies from "js-cookie";
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const data = {
-    Email: e.target.elements.loginUsername.value,
-    Password: e.target.elements.loginPassword.value,
-  };
-  try {
-    const response = await post("account/login", data);
-    const { token } = response.data;
-    Cookies.set("token", token, { expires: 0.01 });
-    window.location.reload();
-  } catch (error) {
-    if (error.response && error.response.status === 401) {
-      alert("Invalid username or password. Please try again.");
-    } else {
-      alert("An error occurred. Please try again later.");
-    }
-    console.error("Login error:", error);
-  }
-};
+import { post } from "./apiHandler";
 
 const LoginForm = ({ setFormFunction }) => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const email = e.target.elements.loginUsername.value;
+    dispatch(setEmail(email));
+
+    try {
+      const response = await post("account/login", {
+        Email: e.target.elements.loginUsername.value,
+        Password: e.target.elements.loginPassword.value,
+      });
+      const { token } = response.data;
+      Cookies.set("token", token, { expires: 1 });
+      dispatch(setEmail(email));
+      window.location.reload();
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        alert("Invalid username or password. Please try again.");
+      } else {
+        alert("An error occurred. Please try again later.");
+      }
+      console.error("Login error:", error);
+    }
+  };
+
   return (
     <form method="POST" onSubmit={handleSubmit}>
       <h2 className="fw-bolder text-dark mb-4">Sign In</h2>
@@ -65,7 +71,6 @@ const LoginForm = ({ setFormFunction }) => {
           Forgot your password?
         </a>
       </div>
-
       <div className="mt-3">
         <a
           onClick={() => setFormFunction("register")}

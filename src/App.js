@@ -5,23 +5,26 @@ import { Navbar } from "./components/Navbar";
 import TeamList from "./components/BuildTeamPage/TeamList";
 import Footer from "./components/Footer";
 import MapInfo from "./components/MapInfo";
-import { store } from "./redux/store";
+import { store, persistor } from "./redux/store";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
   return (
     <Provider store={store}>
-      <Router>
-        <div className="App">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/TeamList" element={<TeamList />} />
-            <Route path="/MapInfo" element={<MapInfo />} />
-          </Routes>
-          <Footer />
-        </div>
-      </Router>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <div className="App">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/TeamList" element={<TeamList />} />
+              <Route path="/MapInfo" element={<MapInfo />} />
+            </Routes>
+            <Footer />
+          </div>
+        </Router>
+      </PersistGate>
     </Provider>
   );
 }

@@ -19,14 +19,47 @@ namespace backend.Controllers
         public ApplicationUserController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
-            _context = context; // Context initialized here
+            _context = context;
         }
         [HttpGet]
         public IActionResult GetAllUsers()
         {
             var users = _userManager.Users;
             return Ok(users);
-                }
+        }
+
+        [HttpGet("GetPlayerIds")]
+        public async Task<IActionResult> GetSelectedPlayerIds([FromQuery] string email)
+        {
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
+
+            return Ok(user.SelectedPlayerIds ?? "No players selected.");
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> ClearSelectedPlayerIds([FromQuery] string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return NotFound($"User not found.");
+            }
+            user.SelectedPlayerIds = null;
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return Ok("Fantasy team reset");
+            }
+
+            // If the update failed, return an error response
+            return BadRequest("Failed to reset PlayerIDs storing the users fantasy team");
+        }
+
+
         [HttpPost("AddPlayers")]
         public async Task<IActionResult> AddPlayers([FromBody] PlayerAddModel model)
         {
@@ -73,9 +106,6 @@ namespace backend.Controllers
             }
         }
 
-
-
-
         [HttpPost("RemovePlayer")]
         public async Task<IActionResult> RemovePlayer([FromBody] PlayerAddModel model)
         {
@@ -93,9 +123,9 @@ namespace backend.Controllers
             else
             {
                 var playerIds = user.SelectedPlayerIds.Split(',').ToList();
-                if (playerIds.Contains(model.PlayerId))
+                if (playerIds.Contains(model.PlayerIds))
                 {
-                    playerIds.Remove(model.PlayerId);
+                    playerIds.Remove(model.PlayerIds);
                     user.SelectedPlayerIds = string.Join(",", playerIds); // Join back to CSV string
                 }
                 else

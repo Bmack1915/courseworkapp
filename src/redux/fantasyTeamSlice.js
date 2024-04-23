@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   players: [],
@@ -12,18 +12,18 @@ export const FantasyTeamSlice = createSlice({
       state.players.push(action.payload);
     },
     removePlayer: (state, action) => {
-      const newPlayers = [...state.players];
-      // console.log(current(newPlayers));
-      console.log(state.players);
-      console.log(action.payload);
       state.players = state.players.filter(
-        (player) => player.playerId != action.payload.playerId
+        (player) => player.playerId !== action.payload.playerId
       );
+    },
+    setFantasyPlayers: (state, action) => {
+      state.players = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addPlayer, removePlayer } = FantasyTeamSlice.actions;
+export const { addPlayer, removePlayer, setFantasyPlayers } =
+  FantasyTeamSlice.actions;
 
 export default FantasyTeamSlice.reducer;

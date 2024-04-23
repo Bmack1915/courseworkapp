@@ -25,7 +25,7 @@ namespace WebCoursework.Controllers
             _context = context;
             _logger = logger;
         }
-        
+
 [HttpGet]
 public async Task<ActionResult<IEnumerable<Player>>> GetPlayer([FromQuery] int? teamId)
 {
@@ -40,6 +40,19 @@ public async Task<ActionResult<IEnumerable<Player>>> GetPlayer([FromQuery] int? 
         return players;
     }
 }
+
+//api/player/5
+[HttpGet("{id}")]
+public async Task<ActionResult<Player>> GetPlayerById(int id)
+{
+    var player = await _context.Player.FindAsync(id);
+    if (player == null)
+    {
+        return NotFound();
+    }
+    return player;
+}
+
 
         // PUT: api/Player/5
         //[Authorize(Roles = "Admin")]

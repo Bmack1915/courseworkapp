@@ -4,15 +4,19 @@ import { API_BASE_URL } from "../../apiConfig";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import { get, post } from "../apiHandler";
+import { get, post, remove, getTeams } from "../apiHandler";
 import AuthCheck from "../AuthCheck";
 import { useSelector, useDispatch } from "react-redux";
-import { addPlayer, removePlayer } from "../../redux/fantasyTeamSlice";
-import { act } from "react-dom/test-utils";
+import {
+  addPlayer,
+  removePlayer,
+  setFantasyPlayers,
+} from "../../redux/fantasyTeamSlice";
 
 const TeamList = () => {
   const dispatch = useDispatch();
   const fantasyPlayers = useSelector((state) => state.fantasyTeam.players);
+  const email = useSelector((state) => state.email.value);
   const [teams, setTeams] = useState([]);
   const [teamPlayers, setTeamPlayers] = useState([]);
   const [selectedTeamId, setSelectedTeamId] = useState("");
@@ -26,6 +30,7 @@ const TeamList = () => {
   useEffect(() => {
     fetchTeams();
     fetchPlayersByTeamId(1);
+    fetchFantasyTeam();
   }, []);
 
   const isPlayerSelected = (selectedPlayer) => {
@@ -63,6 +68,36 @@ const TeamList = () => {
     }
   };
 
+  const fetchFantasyTeam = async () => {
+    console.log(email);
+    try {
+      const response = await getTeams("applicationuser/getplayerids", email);
+      const playerIDs = response.data.split(",");
+      const playerObjects = await Promise.all(
+        playerIDs.map(async (playerID) => {
+          const playerResponse = await get(`player/${playerID}`);
+          return playerResponse.data;
+        })
+      );
+      console.log(playerObjects);
+      dispatch(setFantasyPlayers(playerObjects));
+    } catch (error) {
+      console.error("Failed to fetch fantasy team:", error);
+    }
+  };
+
+  const resetFantasyTeam = async () => {
+    console.log(email);
+    try {
+      await remove("applicationuser", email);
+      console.log("Team successfully deleted");
+      alert("Team successfully reset");
+      window.location.reload();
+    } catch (error) {
+      console.error("Fantasy Team could not be reset", error);
+    }
+  };
+
   const handleAddPlayer = async (e) => {
     if (!selectedPlayerToAdd) {
       alert("Please select a player first.");
@@ -86,21 +121,26 @@ const TeamList = () => {
   };
 
   const SavePlayersToDb = async (e) => {
+    const playerIDs = fantasyPlayers.map((player) => player.playerId);
+    const playerIDsString = playerIDs.join(",");
     try {
       e.preventDefault();
       console.log(e);
       const body = {
-        Email: e.target.elements.loginUsername.value,
-        selectedPlayerId: selectedPlayerToAdd.playerId,
+        Email: email,
+        PlayerIDs: playerIDsString,
       };
 
       console.log(body);
-      const response = await axios.post("applicationuser/addplayer", body);
-      console.log("Player added successfully:", response.data);
-      alert("Player added successfully!");
+      const response = await post("applicationuser/addplayers", body);
+      console.log("Team added successfully:", response.data);
+      alert("Team added successfully!");
     } catch (error) {
-      console.error("Error adding player:", error);
-      alert("Failed to add player.");
+      if (error.response && error.response.status === 400) {
+        alert(
+          "You already have a fantasy team. Please reset it to create a new one."
+        );
+      }
     }
   };
 
@@ -142,7 +182,7 @@ const TeamList = () => {
     <AuthCheck>
       <div className="container">
         <div className="row">
-          <p1> Select your team and start building</p1>
+          <p className="mb-3">Select your team and start building</p>
         </div>
         <div className="row">
           <div className="col-md-4">
@@ -163,20 +203,21 @@ const TeamList = () => {
               <img
                 src={selectedTeamBadgeUrl}
                 alt="Team Badge"
-                style={{ marginTop: "20px", width: "100px", height: "100px" }}
+                className="mt-3 img-fluid"
+                style={{ width: "100px", height: "100px" }}
               />
             )}
-
-            <ul id="player-list">
+            <ul id="player-list" className="list-group mt-3">
               {teamPlayers.map((teamPlayer) => (
                 <li
                   key={teamPlayer.PlayerId}
                   onClick={() => handlePlayerSelect(teamPlayer)}
                   className={
-                    selectedPlayerToAdd &&
+                    "list-group-item " +
+                    (selectedPlayerToAdd &&
                     selectedPlayerToAdd.playerId === teamPlayer.playerId
-                      ? "selected"
-                      : ""
+                      ? "list-group-item-primary"
+                      : "")
                   }
                 >
                   {teamPlayer.name}
@@ -186,16 +227,17 @@ const TeamList = () => {
           </div>
           <div className="col-md-8">
             <h3>Starting Eleven</h3>
-            <ul>
+            <ul className="list-group">
               {fantasyPlayers.map((teamPlayer) => (
                 <li
                   key={teamPlayer.playerId}
                   onClick={() => handleFantasyPlayerSelect(teamPlayer)}
                   className={
-                    selectedPlayerToRemove &&
+                    "list-group-item " +
+                    (selectedPlayerToRemove &&
                     selectedPlayerToRemove.playerId === teamPlayer.playerId
-                      ? "selected"
-                      : ""
+                      ? "list-group-item-danger"
+                      : "")
                   }
                 >
                   {teamPlayer.name}
@@ -204,12 +246,12 @@ const TeamList = () => {
             </ul>
           </div>
         </div>
-        <div>
+        <div className="mt-3">
           <button
             key={
               selectedPlayerToAdd ? selectedPlayerToAdd.playerId : "no-player"
             }
-            className="btn btn-success"
+            className="btn btn-success me-2"
             style={{
               backgroundColor: isPlayerSelectedForButton(selectedPlayerToAdd)
                 ? "lightblue"
@@ -224,7 +266,7 @@ const TeamList = () => {
           </button>
 
           <button
-            className="btn btn-success"
+            className="btn btn-danger me-2"
             style={{
               backgroundColor: isFantasyPlayerSelected(selectedPlayerToRemove)
                 ? "lightblue"
@@ -237,7 +279,7 @@ const TeamList = () => {
           </button>
 
           <button
-            className="btn btn-success"
+            className="btn btn-primary me-2"
             style={{
               backgroundColor: isFantasyTeamFull() ? "lightblue" : "black",
             }}
@@ -245,6 +287,10 @@ const TeamList = () => {
             disabled={!isFantasyTeamFull()}
           >
             Save Team
+          </button>
+
+          <button className="btn btn-warning" onClick={resetFantasyTeam}>
+            Reset Team
           </button>
         </div>
       </div>
