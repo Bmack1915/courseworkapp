@@ -11,6 +11,7 @@ namespace WebCoursework.Models
         public string? BadgeURL { get; set; }
         public double? lat {get; set; }
         public double? lng {get;set;} 
+        public string? description  { get; set; }
 
         //FK
         public int LeagueId { get; set; }
