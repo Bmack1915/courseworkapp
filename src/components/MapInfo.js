@@ -66,10 +66,10 @@ const MapInfo = () => {
                   <div
                     style={{
                       display: "flex",
-                      flexDirection: "column", // Change to column to stack image and text vertically
+                      flexDirection: "column",
                       alignItems: "center",
                       justifyContent: "center",
-                      gap: "20px", // Adjusted gap for better spacing in a column layout
+                      gap: "20px",
                     }}
                   >
                     <img

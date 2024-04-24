@@ -20,7 +20,7 @@ const Homepage = () => {
       setCurrentImage(img_array[index]);
     }, 10000);
 
-    return () => clearInterval(interval); // Clean up interval on component unmount
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -46,7 +46,7 @@ const Homepage = () => {
                       fantasy team today!
                     </p>
                     <div className="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-lg-start">
-                      <Link to="/MapInfo" className="btn btn-primary btn-lg">
+                      <Link to="/TeamList" className="btn btn-primary btn-lg">
                         Get Started
                       </Link>
                     </div>

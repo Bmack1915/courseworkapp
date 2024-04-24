@@ -8,6 +8,7 @@ import MapInfo from "./components/MapInfo";
 import { store, persistor } from "./redux/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route path="/" element={<Homepage />} />
               <Route path="/TeamList" element={<TeamList />} />
               <Route path="/MapInfo" element={<MapInfo />} />
+              <Route path="/Contact" element={<Contact />} />
             </Routes>
             <Footer />
           </div>

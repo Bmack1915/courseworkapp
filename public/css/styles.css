@@ -8421,6 +8421,17 @@ header {
   overflow: visible;
 }
 
+.small-header {
+  padding-top: 10px; /* smaller top padding */
+  padding-bottom: 10px; /* smaller bottom padding */
+  font-size: 0.9rem; /* smaller text */
+}
+
+.small-header h1 {
+  font-size: 1.5rem; /* smaller heading */
+}
+
+
 .object-fit-contain {
   object-fit: contain;
 }
