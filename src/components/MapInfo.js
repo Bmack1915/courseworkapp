@@ -27,37 +27,6 @@ const MapInfo = () => {
 
   return (
     <>
-      <section class="py-5 bg-dark" id="features">
-        <div class="container px-4 my-1">
-          <div class="row gx-5">
-            <div class="col-lg-4 mb-5 mb-lg-0">
-              <h2 class="fw-bolder mb-0 text-white">Team Information</h2>
-            </div>
-            <div class="col-lg-8">
-              <div class="row gx- row-cols-1 row-cols-md-2">
-                <div class="col mb-5 h-100">
-                  <div class="feature bg-dark bg-gradient text-white rounded-3 mb-3">
-                    <i class="bi bi-collection"></i>
-                  </div>
-                  <h2 class="h5 text-white">About the Club</h2>
-                  <p class="mb-0 text-white">
-                    Click on your favourite team to find out more!
-                  </p>
-                </div>
-                <div class="col mb-5 h-100">
-                  <div class="feature bg-dark bg-gradient text-white rounded-3 mb-3">
-                    <i class="bi bi-toggles2"></i>
-                  </div>
-                  <h2 class="h5 text-white">Team Stadium</h2>
-                  <p class="mb-0 text-white">
-                    Click to see a map of your favourite clubs stadium!
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <div>
         <div className="container-flex">
           <div className="tab-container overflow-auto">
@@ -75,6 +44,20 @@ const MapInfo = () => {
               </button>
             ))}
           </div>
+
+          <section class="py-1 bg-dark" id="features">
+            <div class="container px-4 my-1">
+              <div class="row gx-5">
+                <div class="col-lg-12">
+                  <h2 class="fw-bolder mb-0 text-white">Team Information</h2>
+                  <p class="mb-0 text-white">
+                    Click on your favourite team to find out more about the club
+                    and see a map of your favourite club's stadium!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <div className="d-flex w-100 justify-content-between">
             <div className="team-info w-50">

@@ -16,7 +16,7 @@ const AccountForm = () => {
         className="bg-white p-4 rounded-3 shadow"
         style={{ marginTop: "20px" }}
       >
-        <LoginForm setFormFunction={setForm} />;
+        <LoginForm setFormFunction={setForm} />
       </div>
     );
   } else if (form == "register") {
@@ -25,7 +25,7 @@ const AccountForm = () => {
         className="bg-white p-4 rounded-3 shadow"
         style={{ marginTop: "20px" }}
       >
-        <RegisterForm setFormFunction={setForm} />;
+        <RegisterForm setFormFunction={setForm} />
       </div>
     );
   }
