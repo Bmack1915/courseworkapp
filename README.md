@@ -1,3 +1,12 @@
+To run the backend, perform the following commands from the terminal
+- cd backend
+- dotnet run
+
+In a separate terminal, start the from end with:
+
+-npm start
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
