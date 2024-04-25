@@ -334,7 +334,7 @@ const TeamList = () => {
               className="btn btn-success me-2"
               style={{
                 backgroundColor: isPlayerSelectedForButton(selectedPlayerToAdd)
-                  ? "lightblue"
+                  ? "green"
                   : "black",
               }}
               onClick={handleAddPlayer}
@@ -349,7 +349,7 @@ const TeamList = () => {
               className="btn btn-danger me-2"
               style={{
                 backgroundColor: isFantasyPlayerSelected(selectedPlayerToRemove)
-                  ? "lightblue"
+                  ? "red"
                   : "black",
               }}
               onClick={handleRemovePlayer}
@@ -361,7 +361,7 @@ const TeamList = () => {
             <button
               className="btn btn-primary me-2"
               style={{
-                backgroundColor: isFantasyTeamFull() ? "lightblue" : "black",
+                backgroundColor: isFantasyTeamFull() ? "blue" : "black",
               }}
               onClick={SavePlayersToDb}
               disabled={!isFantasyTeamFull()}
@@ -373,43 +373,55 @@ const TeamList = () => {
               Reset Team
             </button>
           </div>
+          <div className="container my-5">
+            <div className="row justify-content-center">
+              <div className="col-auto">
+                {" "}
+                <a className="fs-5 px-2 link-dark" href="https://twitter.com">
+                  <img
+                    src="/social-media/x.png"
+                    alt="Twitter"
+                    style={{ width: "60px", height: "60px" }}
+                  />
+                </a>
+              </div>
+              <div className="col-auto">
+                <a className="fs-5 px-2 link-dark" href="https://facebook.com">
+                  <img
+                    src="/social-media/facebook.png"
+                    alt="Facebook"
+                    style={{ width: "60px", height: "60px" }}
+                  />
+                </a>
+              </div>
+              <div className="col-auto">
+                <a className="fs-5 px-2 link-dark" href="https://linkedin.com">
+                  <img
+                    src="/social-media/linkedin.png"
+                    alt="LinkedIn"
+                    style={{ width: "60px", height: "60px" }}
+                  />
+                </a>
+              </div>
+              <div className="col-auto">
+                <a className="fs-5 px-2 link-dark" href="https://youtube.com">
+                  <img
+                    src="/social-media/youtube.png"
+                    alt="YouTube"
+                    style={{ width: "60px", height: "60px" }}
+                  />
+                </a>
+              </div>
+            </div>
+            <div className="text-center mt-4">
+              <h3 className="text-muted pb-5">
+                Share your team on social media!
+              </h3>
+            </div>
+          </div>
         </div>
       </div>
     </AuthCheck>
   );
 };
 export default TeamList;
-
-{
-  /* <section class="py-5 bg-dark mb-4" id="features">
-        <div class="container px-4 my-1">
-          <div class="row gx-5">
-            <div class="col-lg-4 mb-5 mb-lg-0">
-              <h2 class="fw-bolder mb-0 text-white">Team Information</h2>
-            </div>
-            <div class="col-lg-8">
-              <div class="row gx-5 row-cols-1 row-cols-md-2">
-                <div class="col mb-5 h-100">
-                  <div class="feature bg-dark bg-gradient text-white rounded-3 mb-3">
-                    <i class="bi bi-collection"></i>
-                  </div>
-                  <h2 class="h5 text-white">About the Club</h2>
-                  <p class="mb-0 text-white">
-                    Click on your favourite team to find out more!
-                  </p>
-                </div>
-                <div class="col mb-5 h-100">
-                  <div class="feature bg-dark bg-gradient text-white rounded-3 mb-3">
-                    <i class="bi bi-toggles2"></i>
-                  </div>
-                  <h2 class="h5 text-white">Team Stadium</h2>
-                  <p class="mb-0 text-white">
-                    Click to see a map of your favourite clubs stadium!
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */
-}

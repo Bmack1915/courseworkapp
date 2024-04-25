@@ -5,19 +5,19 @@ import { setFantasyPlayers } from "../redux/fantasyTeamSlice";
 import { setEmail } from "../redux/emailSlice";
 
 const Logout = () => {
+  // Check if token exists to render logout button
   const dispatch = useDispatch();
   if (!Cookies.get("token")) {
     return null;
   }
   const handleLogOut = () => {
+    //Reset token, email & state of fantasyList using redux.
     Cookies.remove("token");
     dispatch(setFantasyPlayers([]));
     dispatch(setEmail(""));
     console.log("User logged out");
-    window.location.href = "/"; // Redirects to the root, which is typically the homepage
+    window.location.href = "/"; //homepage redirect after logout
   };
-
-  // Check if token exists to render logout button
 
   return (
     <button className="btn-secondary rounded-3" onClick={handleLogOut}>
