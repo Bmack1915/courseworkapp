@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import StadiumMap from "./StadiumMap";
-import { API_BASE_URL } from "../apiConfig"; // Confirm this path is correct
+import { API_BASE_URL } from "../apiConfig";
 
 const MapInfo = () => {
   const [teams, setTeams] = useState([]);
@@ -36,8 +36,8 @@ const MapInfo = () => {
                 onClick={() => setSelectedTeam(team)}
                 className={`btn ${
                   selectedTeam && selectedTeam.teamId === team.teamId
-                    ? "btn-dark"
-                    : "btn-light"
+                    ? "btn-active"
+                    : "btn-light btn-hover"
                 } m-1 flex-fill`}
               >
                 {team.name}
@@ -49,17 +49,19 @@ const MapInfo = () => {
             <div class="container px-4 my-1">
               <div class="row gx-5">
                 <div class="col-lg-12">
-                  <h2 class="fw-bolder mb-0 text-white">Team Information</h2>
-                  <p class="mb-0 text-white">
+                  <h2 class="fw-bolder mb-0 text-white pt-3 pb-3">
+                    Team Information
+                  </h2>
+                  <h3 class="mb-0 text-white pt-3 pb-3">
                     Click on your favourite team to find out more about the club
                     and see a map of your favourite club's stadium!
-                  </p>
+                  </h3>
                 </div>
               </div>
             </div>
           </section>
 
-          <div className="d-flex w-100 justify-content-between">
+          <div className="d-flex w-100 justify-content-between pt-2 pb-5">
             <div className="team-info w-50">
               {selectedTeam && (
                 <>
@@ -83,14 +85,14 @@ const MapInfo = () => {
                       }}
                     />
                     <h2>{selectedTeam.name}</h2>
-                    <p className="px-5 text-center lead w-100 fs-15">
+                    <p className="px-5 text-center lead w-100 fs-4">
                       {selectedTeam.description || "No description available."}
                     </p>
                   </div>
                 </>
               )}
             </div>
-            <div className="map-container w-50">
+            <div className="map-container pt-5 w-50">
               {selectedTeam && (
                 <StadiumMap
                   key={`${selectedTeam.lat}-${selectedTeam.lng}`}

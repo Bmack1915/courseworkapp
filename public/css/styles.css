@@ -2940,6 +2940,21 @@ textarea.form-control.is-invalid {
   outline: 0;
   box-shadow: var(--bs-btn-focus-box-shadow);
 }
+.btn-hover:hover {
+  background-color: #000000;
+  color: #f7f72d;
+}
+.btn-active {
+  background-color: #1834d3;
+  color: white;
+  border-color: #343a40;
+}
+
+.btn-hover,
+.btn-active {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .btn-check:checked + .btn,
 :not(.btn-check) + .btn:active,
 .btn:first-child:active,
@@ -8430,7 +8445,6 @@ header {
 .small-header h1 {
   font-size: 1.5rem; /* smaller heading */
 }
-
 
 .object-fit-contain {
   object-fit: contain;

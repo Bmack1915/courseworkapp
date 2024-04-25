@@ -119,8 +119,7 @@ const TeamList = () => {
     setSelectedPlayerToRemove(null);
   };
 
-  //If fantasy team not null, put the team. If null use post to "create" first time
-
+  //If fantasy team not null, put methdo called to edit the team. If null use post to "create" the team for the first time.
   const SavePlayersToDb = async (e) => {
     const playerIDs = fantasyPlayers.map((player) => player.playerId);
     const playerIDsString = playerIDs.join(",");
@@ -178,32 +177,25 @@ const TeamList = () => {
     }
   };
 
-  const [currentImage, setCurrentImage] = useState("/team-badges/kop.png");
-  const [playerImage, setPlayerImage] = useState("/team-badges/pogba.png");
+  const [currentImage, setCurrentImage] = useState(
+    "/images_other/tottenham.png"
+  );
   const img_array = [
-    "/team-badges/kop.png",
-    "/team-badges/stretford.png",
-    "/team-badges/clockend.png",
+    "/images_other/kop.png",
+    "/images_other/stretford.png",
+    "/images_other/tottenham.png",
+    "/images_other/cardiff.png",
   ];
-
-  const player_array = ["/team-badges/pogba.png", "/team-badges/pogba.png"];
 
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
       index = (index + 1) % img_array.length;
       setCurrentImage(img_array[index]);
-    }, 10000);
-
-    let index2 = 0;
-    const interval2 = setInterval(() => {
-      index2 = (index2 + 1) % player_array.length;
-      setPlayerImage(player_array[index2]);
-    }, 10000);
+    }, 8000);
 
     return () => {
       clearInterval(interval);
-      clearInterval(interval2);
     };
   }, []);
 
@@ -219,50 +211,50 @@ const TeamList = () => {
         }}
       ></header>
 
-      <div className="bg-white text-white py-4">
+      <div className="bg-light py-4">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-md-6">
-              <h2 className="text-dark px-3">How to Build Your Team</h2>
-              <div className="d-flex align-items-start py-2 px-3">
+              <h2 className="text-primary mb-4">Build Your Team</h2>
+              <div className="d-flex align-items-start mb-3">
                 <img
-                  src="/team-badges/arrow.png"
+                  src="/images_other/arrowblue.jpeg"
                   alt="Instructions"
                   className="img-fluid me-3"
-                  style={{ width: "50px" }}
+                  style={{ width: "40px" }}
                 />
-                <p className="text-dark">
+                <p>
                   Choose your favourite Premier League team from the dropdown to
                   load players.
                 </p>
               </div>
-              <div className="d-flex align-items-start py-2 px-3">
+              <div className="d-flex align-items-start mb-3">
                 <img
-                  src="/team-badges/arrow.png"
+                  src="/images_other/arrowblue.jpeg"
                   alt="Select"
                   className="img-fluid me-3"
-                  style={{ width: "50px" }}
+                  style={{ width: "40px" }}
                 />
-                <p className="text-dark">Add eleven players to your team.</p>
+                <p>Add eleven players to your team.</p>
               </div>
-              <div className="d-flex align-items-start py-2 px-3">
+              <div className="d-flex align-items-start mb-3">
                 <img
-                  src="/team-badges/arrow.png"
+                  src="/images_other/arrowblue.jpeg"
                   alt="Save"
                   className="img-fluid me-3"
-                  style={{ width: "50px" }}
+                  style={{ width: "40px" }}
                 />
-                <p className="text-dark">
-                  Don't forget to save your selection after making changes.
-                </p>
+                <p>Don't forget to save your selection after making changes.</p>
               </div>
             </div>
             <div className="col-md-6">
               <img
-                src={`${playerImage}`}
+                src="/images_other/pogba.png"
                 alt="Blank Starting Eleven"
                 className="img-fluid"
-                style={{ maxHeight: "300px" }}
+                style={{
+                  maxHeight: "300px",
+                }}
               />
             </div>
           </div>

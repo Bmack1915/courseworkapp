@@ -6,11 +6,14 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const Homepage = () => {
-  const [currentImage, setCurrentImage] = useState("/team-badges/kop.png");
+  const [currentImage, setCurrentImage] = useState(
+    "/images_other/tottenham.png"
+  );
   const img_array = [
-    "/team-badges/kop.png",
-    "/team-badges/stretford.png",
-    "/team-badges/clockend.png",
+    "/images_other/kop.png",
+    "/images_other/stretford.png",
+    "/images_other/tottenham.png",
+    "/images_other/cardiff.png",
   ];
 
   useEffect(() => {
@@ -18,7 +21,7 @@ const Homepage = () => {
     const interval = setInterval(() => {
       index = (index + 1) % img_array.length;
       setCurrentImage(img_array[index]);
-    }, 10000);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, []);

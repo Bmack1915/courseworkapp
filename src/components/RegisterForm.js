@@ -6,9 +6,22 @@ import Cookies from "js-cookie";
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+
+  const email = e.target.elements.loginUsername.value;
+  const password = e.target.elements.loginPassword.value;
+
+  if (email == null || !password) {
+    alert("You must enter both an email and a password");
+    return null;
+  }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert("Please enter a valid email address.");
+    return null;
+  }
   const data = {
-    Email: e.target.elements.loginUsername.value,
-    Password: e.target.elements.loginPassword.value,
+    Email: email,
+    Password: password,
   };
   try {
     const response = await post("account/register", data);
