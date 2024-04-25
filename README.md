@@ -4,7 +4,7 @@ To run the backend, perform the following commands from the terminal
 
 In a separate terminal, start the from end with:
 
--npm start
+- npm start
 
 
 # Getting Started with Create React App
