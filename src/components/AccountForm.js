@@ -6,7 +6,6 @@ import Cookies from "js-cookie";
 
 const AccountForm = () => {
   const [form, setForm] = useState("login");
-  console.log(form);
   if (Cookies.get("token")) {
     return null;
   }

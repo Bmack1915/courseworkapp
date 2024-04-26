@@ -1,7 +1,6 @@
 import React from "react";
 import "../App.css";
 import { post } from "./apiHandler";
-import { API_BASE_URL } from "../apiConfig";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

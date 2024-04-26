@@ -1,6 +1,6 @@
 import React from "react";
 import Cookies from "js-cookie";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setFantasyPlayers } from "../redux/fantasyTeamSlice";
 import { setEmail } from "../redux/emailSlice";
 

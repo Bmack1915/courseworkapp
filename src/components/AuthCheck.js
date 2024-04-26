@@ -1,5 +1,4 @@
 import Cookies from "js-cookie";
-import LoginForm from "./LoginForm";
 import AccountForm from "./AccountForm";
 import Features from "./Features";
 
