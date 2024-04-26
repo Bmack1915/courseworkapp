@@ -12,7 +12,7 @@ using WebCoursework.Models;
 
 namespace WebCoursework.Controllers
 {
-    //[Authorize(Roles = "Admin,User")]
+    [Authorize(Roles = "User")]
     [Route("api/[controller]")]
     [ApiController]
     public class PlayerController : ControllerBase
@@ -55,7 +55,7 @@ public async Task<ActionResult<Player>> GetPlayerById(int id)
 
 
         // PUT: api/Player/5
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPlayer(int id, Player player)
         {
@@ -99,7 +99,7 @@ public async Task<ActionResult<Player>> GetPlayerById(int id)
         }
 
         // POST: api/Player
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Player>> PostPlayer(Player player)
         {
@@ -128,7 +128,7 @@ public async Task<ActionResult<Player>> GetPlayerById(int id)
         }
 
         // DELETE: api/Player/5
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePlayer(int id)
         {

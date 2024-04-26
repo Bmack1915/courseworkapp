@@ -49,7 +49,7 @@ const Homepage = () => {
                       fantasy team today!
                     </p>
                     <div className="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-lg-start">
-                      <Link to="/TeamList" className="btn btn-primary btn-lg">
+                      <Link to="/BuildTeam" className="btn btn-primary btn-lg">
                         Get Started
                       </Link>
                     </div>

@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { setEmail } from "../redux/emailSlice";
 import Cookies from "js-cookie";
 import { post } from "./apiHandler";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginForm = ({ setFormFunction }) => {
   const dispatch = useDispatch();
@@ -15,12 +17,16 @@ const LoginForm = ({ setFormFunction }) => {
     const password = e.target.elements.loginPassword.value;
 
     if (email == null || !password) {
-      alert("You must enter both an email and a password");
+      toast.error("You must enter both an email and a password", {
+        position: "top-center",
+      });
       return null;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address.");
+      toast.error("Please enter a valid email address", {
+        position: "top-center",
+      });
       return null;
     }
 
@@ -35,12 +41,15 @@ const LoginForm = ({ setFormFunction }) => {
       const { token } = response.data;
       Cookies.set("token", token, { expires: 1 });
       dispatch(setEmail(email));
+      toast.success("Login succesfull", {
+        position: "top-center",
+      });
       window.location.reload();
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        alert("Invalid username or password. Please try again.");
+        toast("Invalid username or password. Please try again.");
       } else {
-        alert("An error occurred. Please try again later.");
+        toast("An error occurred. Please try again later.");
       }
       console.error("Login error:", error);
     }

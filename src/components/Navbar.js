@@ -29,7 +29,7 @@ export const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/TeamList" className="nav-link">
+              <Link to="/BuildTeam" className="nav-link">
                 Build Team
               </Link>{" "}
             </li>

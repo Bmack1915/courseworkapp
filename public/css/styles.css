@@ -2942,10 +2942,10 @@ textarea.form-control.is-invalid {
 }
 .btn-hover:hover {
   background-color: #000000;
-  color: #f7f72d;
+  color: #ffffff;
 }
 .btn-active {
-  background-color: #1834d3;
+  background-color: #4b5fce;
   color: white;
   border-color: #343a40;
 }

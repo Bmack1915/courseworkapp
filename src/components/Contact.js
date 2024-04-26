@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -43,7 +44,7 @@ const Contact = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validateForm()) {
-      alert("Email sent! Thanks for your feedback");
+      toast("Email sent! Thanks for your feedback");
       setFormData({
         name: "",
         email: "",
@@ -51,7 +52,7 @@ const Contact = () => {
         message: "",
       });
     } else {
-      alert("Please fill out all fields correctly.");
+      toast("Please fill out all fields correctly.");
     }
   };
 

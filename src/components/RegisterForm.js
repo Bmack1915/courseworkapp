@@ -3,6 +3,8 @@ import "../App.css";
 import { post } from "./apiHandler";
 import { API_BASE_URL } from "../apiConfig";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -11,12 +13,12 @@ const handleSubmit = async (e) => {
   const password = e.target.elements.loginPassword.value;
 
   if (email == null || !password) {
-    alert("You must enter both an email and a password");
+    toast("You must enter both an email and a password");
     return null;
   }
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    alert("Please enter a valid email address.");
+    toast("Please enter a valid email address.");
     return null;
   }
   const data = {
@@ -29,14 +31,14 @@ const handleSubmit = async (e) => {
     Cookies.set("token", token, { expires: 1 });
     await post("account/login", data);
     window.location.reload();
-    alert("Successfully registered and logged in!");
+    toast("Successfully registered and logged in!");
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      alert(
+      toast(
         "Invalid username or password. Please try again. Passwords must have at least one non alphanumeric character and atleast one uppercase and lowercase character"
       );
     } else {
-      alert("An error occurred. Please try again later.");
+      toast("An error occurred. Please try again later.");
     }
     console.error("Login error:", error);
   }

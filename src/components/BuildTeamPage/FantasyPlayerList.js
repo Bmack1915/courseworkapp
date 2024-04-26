@@ -2,7 +2,6 @@ import React from "react";
 import "../../App.css";
 import { useEffect } from "react";
 import { get, post, remove, getTeams, put } from "../apiHandler";
-import AuthCheck from "../AuthCheck";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setFantasyPlayers,

@@ -71,7 +71,6 @@ namespace backend.Controllers
             }
             user.SelectedPlayerIds =  model.PlayerIds;
 
-            // Save changes using UserManager
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
@@ -87,15 +86,13 @@ namespace backend.Controllers
         [HttpPut("AddPlayers")]
         public async Task<IActionResult> EditPlayers([FromBody] PlayerAddModel model)
         {
-            // Find the user by email, check if they exist on the system
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 return NotFound("User not found.");
             }
             user.SelectedPlayerIds =  model.PlayerIds;
-
-            // Save changes using UserManager
+            
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {

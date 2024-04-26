@@ -2,15 +2,17 @@ import React from "react";
 import "../../App.css";
 import { useState } from "react";
 import { useEffect } from "react";
-import { get, post, remove, getTeams, put } from "../apiHandler";
+import { post, remove, put } from "../apiHandler";
 import AuthCheck from "../AuthCheck";
 import { useSelector, useDispatch } from "react-redux";
 import { addPlayer, removePlayer } from "../../redux/fantasyTeamSlice";
 import SocialMedia from "../SocialMedia";
 import TeamPlayerList from "./TeamPlayerList";
 import FantasyPlayerList from "./FantasyPlayerList";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const TeamList = () => {
+const BuildTeam = () => {
   const dispatch = useDispatch();
   //Storing state in store, not the component so it can be used in other components
   const fantasyPlayers = useSelector((state) => state.fantasyTeam.players);
@@ -42,7 +44,7 @@ const TeamList = () => {
     try {
       await remove("applicationuser", email);
       console.log("Team successfully deleted");
-      alert("Team successfully reset");
+      toast("Team successfully reset");
       window.location.reload();
     } catch (error) {
       console.error("Fantasy Team could not be reset", error);
@@ -51,11 +53,11 @@ const TeamList = () => {
 
   const handleAddPlayer = async (e) => {
     if (!selectedPlayerToAdd) {
-      alert("Please select a player first.");
+      toast("Please select a player first.");
       return;
     }
     if (isFantasyTeamFull()) {
-      alert("You cannot add more than 11 players");
+      toast("You cannot add more than 11 players");
       return;
     }
     dispatch(addPlayer(selectedPlayerToAdd));
@@ -63,7 +65,7 @@ const TeamList = () => {
 
   const handleRemovePlayer = async (e) => {
     if (!selectedPlayerToRemove) {
-      alert("Please select a player first.");
+      toast("Please select a player first.");
       return;
     }
     dispatch(removePlayer(selectedPlayerToRemove));
@@ -85,10 +87,10 @@ const TeamList = () => {
       } else {
         await put("applicationuser/addplayers", body);
       }
-      alert("Team added successfully!");
+      toast("Team added successfully!");
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        alert(
+        toast(
           "You already have a fantasy team. Please reset it to create a new one."
         );
         console.log(error.response);
@@ -240,4 +242,4 @@ const TeamList = () => {
     </AuthCheck>
   );
 };
-export default TeamList;
+export default BuildTeam;
